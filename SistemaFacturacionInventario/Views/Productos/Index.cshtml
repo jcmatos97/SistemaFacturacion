@@ -1,0 +1,127 @@
+﻿@model List<SistemaFacturacionInventario.Models.Producto>
+@{
+    ViewBag.Title = "Productos";
+}
+<!-- Page heading -->
+<div class="page-head">
+    <!-- Page heading -->
+    <h2 class="pull-left">
+        Productos
+        <!-- page meta -->
+        <span class="page-meta">Agregue, Edite o Elimine su Producto</span>
+        
+    </h2>
+    <div class="clearfix"></div>
+</div>
+<!-- Page heading ends -->
+
+<div class="matter">
+    <div class="container">
+        <div class="row">
+
+
+            <div class="col-md-12">
+
+                <div class="widget wred">
+
+                    <div class="widget-head">
+                        <div class="pull-left">Listado de Productos</div>
+                        <div class="widget-icons pull-right">
+                            <button type="button" class="btn btn-default" id="btnCrear" data-toggle="modal" data-target="#NuevoProducto">
+                                <strong style="color:red">Añadir</strong>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="widget-content">
+
+                        <table class="table table-bordered ">
+                            <thead>
+                                <tr>
+                                    <td><strong>Foto</strong></td>
+                                    <td><strong>Nombre</strong></td>
+                                    <td><strong>Existencia</strong></td>
+                                    <td><strong>Limite Existencia</strong></td>
+                                    <td><strong>Precio</strong></td>
+                                    <td><strong>Editar</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{foreach (var x in Model)
+                                    {
+                                        <tr>
+                                            @{
+                                                var base64 = Convert.ToBase64String(x.Foto);
+                                                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                                            }
+                                            <td><img src="@imgsrc" class="img-rounded" style="max-height:100px; max-width:100px" /></td>
+                                            <td>@x.Nombre</td>
+                                            <td>@x.Existencia</td>
+                                            <td>@x.LimiteExistencia</td>
+                                            <td>@x.Precio</td>
+                                            <td><button class="btn btn-success" onclick="return getProducto('@x.Id-@x.Nombre-@x.Precio-@x.LimiteExistencia-@x.Existencia-@x.Disponibilidad')" data-toggle="modal" data-target="#NuevoProducto">Editar</button></td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal Nuevo/Editar Producto-->
+<form id="form_product" action="/Productos/GuardarProducto" enctype="multipart/form-data" method="get">
+    <div id="NuevoProducto" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="btnClose" class="close" data-dismiss="modal" onclick="clear()">&times;</button>
+                    <h4 class="modal-title"><label id="title">Productos</label></h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="Id" name="Id" />
+                            <input type="hidden" class="form-control" id="Existencia" name="Existencia" value="0" />
+                            <input type="hidden" class="form-control" id="Disponibilidad" name="Disponibilidad" value="1" />
+                            <label>Nombre</label>
+                            <input type="text" id="Nombre" name="Nombre" class="form-control" />
+                            <br />
+                            <label>Precio</label>
+                            <input type="number" step="0.01" id="Precio" name="Precio" class="form-control" />
+                            <br />
+                            <label>Limite Existencia</label>
+                            <input type="number" id="LimiteExistencia" name="LimiteExistencia" class="form-control" />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div style="margin-right:32%">
+                        <label for="imagen" class="btn btn-success">Subir Foto</label>
+                        <input type="file" id="imagen" name="imagen" style="visibility:hidden" />
+                    </div>
+                    <div style="margin-top:-10.6%">
+                        <button type="submit" id="btnGuardar" class="btn btn-primary">Guardar</button>
+                        <button type="button" id="btnCancelar" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script type="text/javascript" src="~/Scripts/jquery.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/lib/productos.js"></script>
+}

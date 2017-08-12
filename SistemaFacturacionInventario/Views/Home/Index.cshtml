@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<!-- Page heading -->
+<div class="page-head">
+    <!-- Page heading -->
+    <h1 class="pull-left">
+        Bienvenido @User.Identity.Name!
+        <!-- page meta -->
+        <span class="page-meta">SIF SOLUTION</span>
+
+    </h1>
+    <div class="clearfix"></div>
+</div>
+<!-- Page heading ends -->
+
+<div class="matter">
+    <div class="container">
+
+        <!-- Today status. jQuery Sparkline plugin used. -->
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-2">
+                <!-- List starts -->
+                <ul class="today-datas">
+
+                   
+                    <li class="bred">
+                        <a id="pedidos" data-toggle="modal" data-target="#NuevoPedido">
+                            <div class="pull-left"><span id="todayspark1" class="fa fa-truck fa-5x"></span></div>
+                            <div class="datas-text pull-right" style="background-color;margin-left:5px"><span class="bold">Pedidos</span>Reciba un Pedido</div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </li>
+                    <li class="bred">
+                        <a id="ventas" data-toggle="modal" data-target="#NuevaVenta">
+                            <div class="pull-left"><span id="todayspark1" class="fa fa-file-text-o fa-5x"></span></div>
+                            <div class="datas-text pull-right" style="background-color;margin-left:5px"><span class="bold">Venta</span>Realice una Venta</div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </li>
+                    <li class="bred">
+                        <a href="/Proveedor">
+                            <div class="pull-left"><span id="todayspark1" class="fa fa-vcard fa-5x"></span></div>
+                            <div class="datas-text pull-right" style="background-color;margin-left:5px"><span class="bold">Proveedores</span>Modifique los Proveedores</div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </li>                    
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-2">
+                <ul class="today-datas">
+                    <li class="bred">
+                        <a href="/Clientes">
+                            <div class="pull-left"><span id="todayspark1" class="fa fa-users fa-5x"></span></div>
+                            <div class="datas-text pull-right" style="background-color;margin-left:5px"><span class="bold">Clientes</span>Modifique Clientes</div>
+                            <div class="clearfix"></div>
+
+                        </a>
+                    </li>
+                    <li class="bred">
+                        <a href="/Productos">
+                            <div class="pull-left"><span id="todayspark1" class="fa fa-cubes fa-5x"></span></div>
+                            <div class="datas-text pull-right" style="background-color;margin-left:5px"><span class="bold">Productos</span>Modifique Productos</div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </li>
+                    <li class="bred">
+                        <a href="Roles/Configurar/">
+                            <div class="pull-left"><span id="todayspark1" class="fa fa-cog fa-fw fa-5x"></span></div>
+                            <div class="datas-text pull-right" style="background-color;margin-left:5px"><span class="bold">Roles</span>Modifique Roles</div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </li> 
+                 
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-2">
+                <ul class="today-datas">
+                    <li class="bred">
+                        <a href="/Account/Register">
+                            <div class="pull-left"><span id="todayspark1" class="fa fa-user-plus fa-5x"></span></div>
+                            <div class="datas-text pull-right" style="background-color;margin-left:5px"><span class="bold">Usuarios</span>Registre Usuarios en <strong>Sistema de Facturacion</strong></div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </li>
+                    <li class="bred">
+                        <a href="javascript:document.getElementById('logoutForm').submit()">
+                            <div class="pull-left"><span id="todayspark1" class="fa fa-power-off fa-5x"></span></div>
+                            <div class="datas-text pull-right" style="background-color;margin-left:5px"><span class="bold">Cerrar Sesión</span>Cierre Sesión al Finalizar su Actividad</div>
+                            <div class="clearfix"></div>
+                        </a>
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript" src="~/Scripts/jquery.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/lib/productos.js"></script>
+}

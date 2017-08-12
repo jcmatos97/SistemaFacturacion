@@ -1,0 +1,308 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="">
+        <title>SIF SOLUTION</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        <script type="text/javascript">
+        var appInsights = window.appInsights || function (config) {
+            function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = u.createElement(o), i, f; for (s.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;) r("track" + i.pop()); return r("setAuthenticatedUserContext"), r("clearAuthenticatedUserContext"), config.disableExceptionTracking || (i = "onerror", r("_" + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t["_" + i](config, r, u, e, o), s }), t
+        }({
+            instrumentationKey: "69ae9aef-61f6-4984-8df3-c3f8bcba30a4"
+        });
+
+        window.appInsights = appInsights;
+        appInsights.trackPageView();
+        </script>
+
+        <link rel="shortcut icon" href="img/favicon/favicon.png">
+    </head>
+
+    <body>
+
+        <!--Encabezado-->
+        <div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+
+            <div class="container">
+                <!-- Menu button for smallar screens -->
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="index.html" class="navbar-brand">SIF SOLUTION</a>
+                </div>
+                <!-- Site name for smallar screens -->
+                <!-- Navigation starts -->
+                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+
+                    <!-- Links -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            @if (Request.IsAuthenticated)
+                            {
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                     @User.Identity.Name <b class="caret"></b>
+                                </a>
+                            }
+                            <!-- Dropdown menu -->
+                            <ul class="dropdown-menu">
+                                <li><a href="Roles/Configurar/"><i class="fa fa-cog fa-fw"></i>Configurar Roles</a></li>
+                                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-power-off"></i> Salir</a></li>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                    }
+                                }
+                            </ul>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+
+
+        <!-- Main content starts -->
+
+        <div class="content">
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-dropdown"><a href="#">Menu Lateral</a></div>
+
+                <div class="sidebar-inner">
+
+                    <!--- Sidebar navigation -->
+                    <!-- If the main navigation has sub navigation, then add the class "has_submenu" to "li" of main navigation. -->
+                    <ul class="navi">
+
+                        <!-- Use the class nred, ngreen, nblue, nlightblue, nviolet or norange to add background color. You need to use this in <li> tag. -->
+
+                        <li class="nred" style="margin-top:10px"><a href="/Home"><i class="fa fa-home"></i> Inicio</a></li>
+                        <li class="nred"><a href="/Productos"><i class="fa fa-cubes"></i> Productos</a></li>
+                        <li class="nred"><a href="/Proveedor"><i class="fa fa-vcard"></i> Proveedores</a></li>
+                        <li class="nred"><a href="/Clientes"><i class="fa fa-users"></i> Clientes</a></li>
+
+                        <li class="has_submenu nred">
+                            <a href="#">
+                                <i class="fa fa-truck"></i> Pedidos
+                                <span class="pull-right"><i class="fa fa-angle-right"></i></span>
+                            </a>
+
+                            <ul>
+                                <li><a id="pedidos" data-toggle="modal" data-target="#NuevoPedido">Recibir Pedido</a></li>
+                                <li><a href="/Pedidos/ListaPedidos">Lista de Pedidos</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="has_submenu nred">
+                            <a href="#">
+                                <i class="fa fa-file-text-o"></i> Ventas
+                                <span class="pull-right"><i class="fa fa-angle-right"></i></span>
+                            </a>
+
+                            <ul>
+                                <li><a id="ventas" data-toggle="modal" data-target="#NuevaVenta">Realizar Venta</a></li>
+                                <li><a href="/Ventas/ListaVentas">Lista de Ventas</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Sidebar ends -->
+            <!-- Main bar -->
+            <div class="mainbar">
+
+
+
+
+
+
+
+                <!-- Matter -->
+                @RenderBody()
+                <!-- Matter ends -->
+
+            </div>
+
+            <!-- Mainbar ends -->
+            <div class="clearfix"></div>
+
+        </div>
+        <!-- Content ends -->
+        <!--Modal para Pedidos-->
+        <form id="form_pedidos" action="/Pedidos/CrearPedido/" method="post">
+            <div id="NuevoPedido" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" id="btnClose" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"><label id="title">Recibir Pedido</label></h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label>Nombre Proveedor</label>
+                                    <select class="form-control" id="select_Proveedor" name="select_Proveedor"></select>
+                                </div>
+
+                                <div class="form-group">
+                                    <div style="margin-top:10%">
+                                        <button type="submit" id="btnContinuar" class="btn btn-primary">Continuar</button>
+                                        <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal" onclick="">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--Modal para Ventas-->
+        <form id="form_ventas" action="/Ventas/CrearVenta/" method="post">
+            <div id="NuevaVenta" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" id="btnClose" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"><label id="title">Realizar Venta</label></h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label>Nombre Cliente</label>
+                                    <select class="form-control" id="select_Cliente" name="select_Cliente"></select>
+                                </div>
+
+                                <div class="form-group">
+                                    <div style="margin-top:10%">
+                                        <button type="submit" id="btnContinuar" class="btn btn-primary">Continuar</button>
+                                        <button type="button" id="btnCancelar" class="btn btn-danger" data-dismiss="modal" onclick="">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--Fin de Modal para Pedidos-->
+        <!--Script para los Pedidos-->
+        <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+            getClientes();
+            getProveedors();
+        });
+
+        function getClientes() {
+            $.ajax({
+                url: '/Clientes/GetClientes/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var rows = '';
+                    $.each(data, function (i, item) {
+                        rows += "<option value=" + item.Id + ">" + item.Nombre + " "+item.Apellido+"</option>";
+                        $("#select_Cliente").html(rows);
+                    });
+                },
+                error: function (err) {
+                    //alert("Error: " + err.responseText);
+                }
+            });
+        }
+        function getProveedors() {
+            $.ajax({
+                url: '/Proveedor/GetProveedores/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var rows = '';
+                    $.each(data, function (i, item) {
+                        rows += "<option value=" + item.Id + ">" + item.NombreProveedor + "</option>";
+                        $("#select_Proveedor").html(rows);
+                    });
+                },
+                error: function (err) {
+                    //alert("Error: " + err.responseText);
+                }
+            });
+        }
+        
+        </script>
+
+        <!--Fin Script para los Pedidos-->
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+
+    </body>
+
+</html>
+}
+else {
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="">
+        <title>SIF SOLUTION</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        <script type="text/javascript">
+        var appInsights = window.appInsights || function (config) {
+            function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = u.createElement(o), i, f; for (s.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;) r("track" + i.pop()); return r("setAuthenticatedUserContext"), r("clearAuthenticatedUserContext"), config.disableExceptionTracking || (i = "onerror", r("_" + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t["_" + i](config, r, u, e, o), s }), t
+        }({
+            instrumentationKey: "69ae9aef-61f6-4984-8df3-c3f8bcba30a4"
+        });
+
+        window.appInsights = appInsights;
+        appInsights.trackPageView();
+        </script>
+
+        <link rel="shortcut icon" href="img/favicon/favicon.png">
+    </head>
+
+    <body>
+        <!-- Matter -->
+        @RenderBody()
+        <!-- Matter ends -->
+        
+        <!--Fin Script para los Pedidos-->
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+
+    </body>
+
+</html>
+}

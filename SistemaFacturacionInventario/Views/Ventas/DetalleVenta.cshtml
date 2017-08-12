@@ -1,0 +1,116 @@
+﻿
+@model SistemaFacturacionInventario.Controllers.FacturaVentas
+
+@{
+    ViewBag.Title = "DetalleVentas";
+}
+
+<!-- Page heading -->
+<div class="page-head">
+    <!-- Page heading -->
+    <h2 class="pull-left">
+        Detalle de la Venta
+        
+        <!-- page meta -->
+        <span class="page-meta">Visualice con detalle una venta realizado</span>
+    </h2>
+    <br />
+
+    <div class="clearfix"></div>
+</div>
+
+<!-- Page heading ends -->
+
+<div class="matter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget wred">
+                    <div class="widget-head">
+                        <div class="pull-left">Venta #@Model.encabezado.Id <br /> <h6 style="font-size:small;color:white">Expedida en el @Model.encabezado.Fecha</h6></div>
+                        <div class="pull-right">
+                            Cliente: @Model.encabezado.NombreCliente
+                        </div>
+                        <br />
+                        <div class="pull-right">
+                            <h6 style="font-size:small;color:white"> Atendido por: @Model.encabezado.NombresDelUsuario</h6>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="widget-content">
+
+                        <table class="table table-bordered ">
+                            <thead>
+                                <tr>
+                                    <td><strong>Producto</strong></td>
+                                    <td><strong>Cantidad</strong></td>
+                                    <td><strong>Precio Unitario</strong></td>
+                                    <td><strong>Subtotal</strong></td>
+                                    <td><strong>ITBIS</strong></td>
+                                    <td><strong>Total Detalle</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody id="">
+                                @{foreach (var x in Model.detalle)
+                                    {
+                                        <tr>
+                                            <td>@x.Producto</td>
+                                            <td>@x.Cantidad</td>
+                                            <td>@x.PrecioUnitario</td>
+                                            <td>@x.Subtotal</td>
+                                            <td>@x.ITBIS</td>
+                                            <td>@x.TotalDetalle</td>
+
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <div class="widget-foot">
+
+                        <table align="right">
+                            <col width="100">
+                            <col width="80">
+                            <tbody id="total_pedido">
+                                @{foreach (var x in Model.totales)
+                                    {
+                                        <tr>
+                                            <td><strong>SubTotal</strong></td>
+                                            <td>@x.SubTotal</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ITBIS</strong></td>
+                                            <td>@x.ITBIS</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Total</strong></td>
+                                            <td>@x.Total</td>
+                                        </tr>
+                                    }
+
+                                }
+
+                            </tbody>
+                        </table>
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript" src="~/Scripts/jquery.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/lib/pedido_detalle.js"></script>
+}

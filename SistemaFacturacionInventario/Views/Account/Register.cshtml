@@ -1,0 +1,103 @@
+﻿@model SistemaFacturacionInventario.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="page-head">
+    <!-- Page heading -->
+    <h2 class="pull-left">
+        Registro
+    </h2>
+    <div class="clearfix"></div>
+</div>
+<div class="matter">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-7">
+                <!-- Quick setting -->
+                <div class="widget wred">
+                    <div class="widget-head">
+                        <div class="pull-left">Agregue mas Usuarios al Sistema</div>
+                        <div class="widget-icons pull-right">
+                            <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                            <a href="#" class="wclose"><i class="icon-remove"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="widget-content">
+                        <div class="padd">
+
+                            <div class="form quick-post">
+                                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="NombreUsuario">Nickname</label>
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.NombreUsuario, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Nombre, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Apellido, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="row" style="">
+                                        <div class="col-sm-5">
+                                            <div class="col-sm-1">
+                                                <label class="btn btn-info col-md-offset-2" for="Foto">Foto</label>
+                                                <input type="file" name="Foto" id="Foto" class="form-control" style="display:none" />
+                                            </div>
+                                            <div class="col-sm-1 col-md-offset-2">
+                                                <input type="submit" class="btn btn-default" value="Register" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+            </div>
+
+
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }

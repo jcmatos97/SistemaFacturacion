@@ -1,0 +1,122 @@
+﻿@model List<SistemaFacturacionInventario.Controllers.ListaVentas>
+@{
+    ViewBag.Title = "ListaPedidos";
+}
+
+<!-- Page heading -->
+<div class="page-head">
+    <!-- Page heading -->
+    <h2 class="pull-left">
+        Ventas Realizadas
+        <!-- page meta -->
+        <span class="page-meta">Visualice detalladamente cada Factura de Venta</span>
+
+    </h2>
+    <div class="clearfix"></div>
+</div>
+<!-- Page heading ends -->
+
+<div class="matter">
+    <div class="container">
+        <div class="row">
+
+
+            <div class="col-md-12">
+
+                <div class="widget wred">
+
+                    <div class="widget-head">
+                        <div class="pull-left">Facturas de la Venta</div>
+                        <div class="widget-icons pull-right">
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#NuevaVenta">
+                                <strong style="color:red">Añadir</strong>
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="widget-content">
+
+                        <table class="table table-bordered ">
+                            <thead>
+                                <tr>
+                                    <td><strong>Proveedor</strong></td>
+                                    <td><strong>Usuario</strong></td>
+                                    <td><strong>Fecha</strong></td>
+                                    <td><strong>Subtotal</strong></td>
+                                    <td><strong>ITBIS</strong></td>
+                                    <td><strong>Total</strong></td>
+                                    <td><strong>Ver Detalle</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody id="">
+                                @{foreach (var x in Model)
+                                    {
+                                        <tr>
+                                            <td>@x.Cliente</td>
+                                            <td>@x.Nombre</td>
+                                            <td>@x.Fecha</td>
+                                            <td>@x.SubTotal</td>
+                                            <td>@x.ITBIS</td>
+                                            <td>@x.Total</td>
+                                            <td><a href="/Ventas/DetalleVenta/@x.Id" class="btn btn-info">Ver</a></td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Nuevo/Editar Proveedor-->
+<div id="NuevoProveedor" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="btnClose" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><label id="title">Titulo</label></h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="Id" />
+                        <label>Nombre</label>
+                        <input type="text" id="Nombre" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefono</label>
+                        <input type="number" id="Telefono" class="form-control" />
+                    </div>
+
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label>Direccion</label>
+                        <input type="text" id="Direccion" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <div style="margin-top:16%">
+                            <button type="submit" id="btnGuardar" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                            <button type="button" id="btnCancelar" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript" src="~/Scripts/jquery.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+}

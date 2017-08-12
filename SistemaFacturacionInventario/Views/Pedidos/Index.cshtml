@@ -1,0 +1,121 @@
+﻿@model SistemaFacturacionInventario.ViewModels.EncabezadoPedido
+@{
+    ViewBag.Title = "Creacion Pedido";
+}
+
+<!-- Page heading -->
+<div class="page-head">
+    <!-- Page heading -->
+    <h2 class="pull-left">
+        Detalle del Pedido
+        <!-- page meta -->
+        <span class="page-meta">Agregue o Elimine los Detalles del Pedido</span>
+    </h2>
+    <br />
+    
+    <div class="clearfix"></div>
+</div>
+<!-- Page heading ends -->
+
+<div class="matter">
+    <div class="container">
+        <div>
+            <input type="text" id="PedidoId" name="PedidoId" value="@Model.Id" hidden />
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="Cantidad">Cantidad</label>
+                    <input type="number" id="Cantidad" name="Cantidad" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Precio">Precio</label>
+                    <input type="number" id="Precio" name="Precio" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="select_Producto">Producto</label>
+                    <select class="form-control" id="select_Producto" name="select_Proveedor"></select>
+                </div>
+                <div class="form-group" style="margin-top:2.7%">
+                    <button type="submit" id="btnAgregar" class="btn btn-primary">Agregar</button>
+                </div>
+                <div class="form-group" style="margin-top:2.7%">
+                    <a href="/Home/Index" id="" class="btn btn-success">Salir y Guardar</a>
+                </div>
+                <div class="form-group" style="margin-top:2.7%">
+                    <a href="/Pedidos/delete_Pedido/@Model.Id" id="btnBorrar" class="btn btn-danger">Salir y Eliminar</a>
+                </div>
+            </div>
+        </div>
+     
+            <div id="ErrorInventario" class="row" style="margin-top:0.5%;display:none;">
+                <div class="col-md-10">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <strong>¡Error al Insertar Detalle del Pedido!</strong><span id="mensaje_error"><br> La Cantidad sobrepasa la Capacidad en Inventario o la Cantidad es Negativa</span>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="row">
+
+
+            <div class="col-md-12">
+
+                <div class="widget wred">
+
+                    <div class="widget-head">
+                        <div class="pull-left">Pedido #@Model.Id <br/> <h6 style="font-size:small;color:white">Expedida en el @Model.Fecha</h6></div>
+                        <div class="pull-right">
+                            Proveedor: @Model.NombreProveedor
+                        </div>
+                        <br />
+                        <div class="pull-right">
+                            <h6 style="font-size:small;color:white"> Atendido por: @Model.NombresDelUsuario</h6>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="widget-content">
+
+                        <table class="table table-bordered ">
+                            <thead>
+                                <tr>
+                                    <td><strong>Producto</strong></td>
+                                    <td><strong>Cantidad</strong></td>
+                                    <td><strong>Precio Unitario</strong></td>
+                                    <td><strong>Subtotal</strong></td>
+                                    <td><strong>ITBIS</strong></td>
+                                    <td><strong>Total Detalle</strong></td>
+                                    <td><strong>Accion</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbdoy_detalles_pedido"></tbody>
+                        </table>
+
+                    </div>
+
+                    <div class="widget-foot">
+
+                        <table align="right">
+                            <col width="100">
+                            <col width="80">
+                            <tbody id="total_pedido">
+                                
+
+                            </tbody>
+                        </table>
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+@section Scripts{
+    <script type="text/javascript" src="~/Scripts/jquery.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/lib/pedido_detalle.js"></script>
+}
